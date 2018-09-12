@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const BestTalentPerformance = new Schema({
+const Performance = new Schema({
     name: String,
     stream: {
         type: String,
@@ -12,4 +12,4 @@ const BestTalentPerformance = new Schema({
     pointQueue: Number
 });
 
-module.exports = mongoose.model('BestTalentPerformance', BestTalentPerformance)
+module.exports = mongoose.model('Performance', Performance)
