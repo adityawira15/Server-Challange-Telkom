@@ -163,4 +163,21 @@ router.post('/api/projects/:id', (req, res) => {
   })
 })
 
+router.delete('/api/projects/:id', (req, res) => {
+  Project.remove({_id: req.params.id}).exec(err => {
+    if(err){
+      res.json({
+        status: 400,
+        message: 'Gagal Delete!',
+        messageErr: err
+      })
+    }else{
+      res.json({
+        status: 200,
+        message: 'Success Delete!'
+      })
+    }
+  })
+})
+
 module.exports = router;
