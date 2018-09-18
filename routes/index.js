@@ -115,7 +115,7 @@ router.get('/api/projects/:id', (req, res) => {
 })
 
 router.post('/api/projects', (req, res) => {
-  let project = new Projects(req.body)
+  let project = new Project(req.body)
   project.save(err => {
     if (err) {
       res.json({
