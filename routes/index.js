@@ -133,4 +133,34 @@ router.post('/api/projects', (req, res) => {
   })
 })
 
+router.post('/api/projects/:id', (req, res) => {
+  Project.findById(req.params.id).exec((err, project) => {
+    project.set({
+      name: req.body.name,
+      unit: req.body.unit,
+      stakeHolder: req.body.stakeHolder,
+      sprint: req.body.sprint,
+      status: req.body.status,
+      description: req.body.description,
+      starDate: req.body.starDate,
+      endDate: req.body.endDate
+    })
+    project.save(err => {
+      if(err){
+        res.json({
+          status: 400,
+          message: 'Gagal Edit!',
+          messageErr: err
+        })
+      }else{
+        res.json({
+          status: 200,
+          message: 'Success Edit!',
+          data: project
+        })
+      }
+    })
+  })
+})
+
 module.exports = router;
