@@ -3,7 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/users')
 var Project = require('../models/projects')
-
+var ProductPerformance = require('../models/productPerformance')
+var SquadPerformance = require('../models/squadPerformance')
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -179,5 +180,81 @@ router.delete('/api/projects/:id', (req, res) => {
     }
   })
 })
+
+router.get('/api/productperformance', (req, res) => {
+  ProductPerformance.find({}).exec((err, performance) => {
+    if(err){
+      res.json({
+        status: 400,
+        message: 'Gagal',
+        messsageErr: err
+      })
+    }else{
+      res.json({
+        status: 200,
+        message: 'Success Get!',
+        data: performance
+      })
+    }
+  })
+})
+
+router.post('/api/productperformance', (req, res) => {
+  let productPerformance = new ProductPerformance(req.body)
+  productPerformance.save((err) => {
+    if(err){
+      res.json({
+        status: 400,
+        message: 'Gagal',
+        messsageErr: err
+      })
+    }else{
+      res.json({
+        status: 200,
+        message: 'Success Post!',
+        data: productPerformance
+      })
+    }
+  })
+})
+
+router.get('/api/squadperformance', (req, res) => {
+  SquadPerformance.find({}).exec((err, performance) => {
+    if(err){
+      res.json({
+        status: 400,
+        message: 'Gagal',
+        messsageErr: err
+      })
+    }else{
+      res.json({
+        status: 200,
+        message: 'Success Get!',
+        data: performance
+      })
+    }
+  })
+})
+
+router.post('/api/squadperformance', (req, res) => {
+  let squadPerformance = new SquadPerformance(req.body)
+  squadPerformance.save((err) => {
+    if(err){
+      res.json({
+        status: 400,
+        message: 'Gagal',
+        messsageErr: err
+      })
+    }else{
+      res.json({
+        status: 200,
+        message: 'Success Post!',
+        data: squadPerformance
+      })
+    }
+  })
+})
+
+
 
 module.exports = router;
